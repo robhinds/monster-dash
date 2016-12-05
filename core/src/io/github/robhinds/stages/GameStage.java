@@ -52,6 +52,10 @@ public class GameStage extends Stage implements ContactListener {
         createCloud();
     }
 
+    private void createCloud() {
+        addActor(new Cloud());
+    }
+
     private void setUpGround() {
         ground = new Ground(WorldUtils.createGround(world));
         addActor(ground);
@@ -85,13 +89,6 @@ public class GameStage extends Stage implements ContactListener {
         }
     }
 
-    private void updateCloud(Body body) {
-        if (!BodyUtils.bodyInBounds(body)) {
-            createCloud();
-            world.destroyBody(body);
-        }
-    }
-
     private void updateRunner(Body body) {
         if (!BodyUtils.runnerIsCentered(body)) {
             //body.applyLinearImpulse(Constants.RUNNER_RUN_BACK_LINEAR_IMPULSE, body.getWorldCenter(), true);
@@ -101,11 +98,6 @@ public class GameStage extends Stage implements ContactListener {
     private void createEnemy() {
         Enemy enemy = new Enemy(WorldUtils.createEnemy(world));
         addActor(enemy);
-    }
-
-    private void createCloud() {
-        Cloud cloud = new Cloud(WorldUtils.createCloud(world));
-        addActor(cloud);
     }
 
     @Override
@@ -123,11 +115,6 @@ public class GameStage extends Stage implements ContactListener {
         for (Body body : bodies) {
             if (BodyUtils.bodyIsRunner(body)) {
                 updateRunner(body);
-            }
-        }
-        for (Body body : bodies) {
-            if (BodyUtils.bodyIsCloud(body)) {
-                updateCloud(body);
             }
         }
 
@@ -171,8 +158,7 @@ public class GameStage extends Stage implements ContactListener {
         getCamera().unproject(touchPoint.set(x, y, 0));
     }
 
-    @Override
-    public void beginContact(Contact contact) {
+    @Override public void beginContact(Contact contact) {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||

@@ -2,18 +2,12 @@ package io.github.robhinds.utils;
 
 import java.util.Random;
 
-import io.github.robhinds.enums.CloudType;
 import io.github.robhinds.enums.EnemyType;
 
 public class RandomUtils {
 
     public static EnemyType getRandomEnemyType() {
         RandomEnum<EnemyType> randomEnum = new RandomEnum<EnemyType>(EnemyType.class);
-        return randomEnum.random();
-    }
-
-    public static CloudType getRandomCloudType() {
-        RandomEnum<CloudType> randomEnum = new RandomEnum<CloudType>(CloudType.class);
         return randomEnum.random();
     }
 

@@ -23,6 +23,7 @@ public class Constants {
     public static final float RUNNER_WIDTH = 1f;
     public static final float RUNNER_HEIGHT = 2f;
     public static final float RUNNER_GRAVITY_SCALE = 3f;
+    public static final String BACKGROUND_IMAGE_PATH = "favicon.png";
     public static float RUNNER_DENSITY = 0.5f;
     public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
     public static final float RUNNER_HIT_ANGULAR_IMPULSE = 10f;
@@ -35,7 +36,7 @@ public class Constants {
     public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-6f, 0);
 
     public static final float CLOUD_X = VIEWPORT_WIDTH + 5f;
-    public static final float CLOUD_Y = GROUND_HEIGHT;
-    public static final float CLOUD_DENSITY = RUNNER_DENSITY;
-    public static final Vector2 CLOUD_LINEAR_VELOCITY = new Vector2(-5f, 0);
+    public static final float CLOUD_Y = VIEWPORT_HEIGHT;
+    public static final float CLOUD_DENSITY = -10;
+    public static final Vector2 CLOUD_LINEAR_VELOCITY = new Vector2(-2f, 0);
 }

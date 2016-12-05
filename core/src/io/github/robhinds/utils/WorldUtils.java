@@ -6,11 +6,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import io.github.robhinds.box2d.CloudUserData;
 import io.github.robhinds.box2d.EnemyUserData;
 import io.github.robhinds.box2d.GroundUserData;
 import io.github.robhinds.box2d.RunnerUserData;
-import io.github.robhinds.enums.CloudType;
 import io.github.robhinds.enums.EnemyType;
 
 public class WorldUtils {
@@ -57,23 +55,6 @@ public class WorldUtils {
         body.createFixture(shape, enemyType.getDensity());
         body.resetMassData();
         EnemyUserData userData = new EnemyUserData(enemyType.getWidth(), enemyType.getHeight());
-        body.setUserData(userData);
-        shape.dispose();
-        return body;
-    }
-
-
-    public static Body createCloud(World world) {
-        CloudType cloudType = RandomUtils.getRandomCloudType();
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(new Vector2(cloudType.getX(), cloudType.getY()));
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(cloudType.getWidth() / 2, cloudType.getHeight() / 2);
-        Body body = world.createBody(bodyDef);
-        body.createFixture(shape, cloudType.getDensity());
-        body.resetMassData();
-        CloudUserData userData = new CloudUserData(cloudType.getWidth(), cloudType.getHeight());
         body.setUserData(userData);
         shape.dispose();
         return body;
