@@ -1,5 +1,9 @@
 package io.github.robhinds.actors;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -8,6 +12,7 @@ import io.github.robhinds.utils.Constants;
 
 public class Runner extends GameActor {
 
+    private final TextureRegion textureRegion;
     private boolean hit = false;
     private boolean dodging = false;
     private boolean jumping = false;
@@ -16,10 +21,18 @@ public class Runner extends GameActor {
 
     public Runner(Body body) {
         super(body);
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.HERO_IMAGE_PATH)));
     }
 
     @Override public RunnerUserData getUserData() {
         return (RunnerUserData) userData;
+    }
+
+    @Override public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        // Running
+        batch.draw(textureRegion, screenRectangle.x, screenRectangle.y,
+                screenRectangle.getWidth(), screenRectangle.getHeight());
     }
 
     public void jump() {

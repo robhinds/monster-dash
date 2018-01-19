@@ -26,6 +26,8 @@ public class Constants {
     public static final float RUNNER_GRAVITY_SCALE = 3f;
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
+    public static final String HERO_IMAGE_PATH = "pacman.png";
+    public static final String ENEMY_IMAGE_PATH = "ghost.png";
     public static final String BACKGROUND_CLOUD_PATH = "clouds.png";
     public static float RUNNER_DENSITY = 0.5f;
     public static final float RUNNER_DODGE_X = 2f;
