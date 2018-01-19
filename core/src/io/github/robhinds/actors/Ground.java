@@ -14,7 +14,6 @@ public class Ground extends GameActor {
     private final TextureRegion textureRegion;
     private Rectangle textureRegionBounds1;
     private Rectangle textureRegionBounds2;
-    private int speed = 10;
 
     public Ground(Body body) {
         super(body);
@@ -47,12 +46,12 @@ public class Ground extends GameActor {
     }
 
     private boolean leftBoundsReached(float delta) {
-        return (textureRegionBounds2.x - transformToScreen(delta * speed)) <= 0;
+        return (textureRegionBounds2.x - transformToScreen(delta * Constants.GROUND_SPEED)) <= 0;
     }
 
     private void updateXBounds(float delta) {
-        textureRegionBounds1.x += transformToScreen(delta * speed);
-        textureRegionBounds2.x += transformToScreen(delta * speed);
+        textureRegionBounds1.x += transformToScreen(delta * Constants.GROUND_SPEED);
+        textureRegionBounds2.x += transformToScreen(delta * Constants.GROUND_SPEED);
     }
 
     private void resetBounds() {

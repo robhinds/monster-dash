@@ -84,4 +84,8 @@ public class Runner extends GameActor {
     public boolean isHorizontal() {
         return body.getAngle() != 0;
     }
+
+    public boolean isInvincible() { return invincible; }
+
+    public void setInvincible(boolean i) { this.invincible = i; }
 }
