@@ -1,12 +1,15 @@
 package io.github.robhinds.actors;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import io.github.robhinds.box2d.RunnerUserData;
+import io.github.robhinds.utils.Constants;
 
 public class Runner extends GameActor {
 
     private boolean hit = false;
+    private boolean dodging = false;
     private boolean jumping = false;
     private boolean doubleJumping = false;
     private boolean invincible = false;
@@ -43,6 +46,22 @@ public class Runner extends GameActor {
             hit = true;
             invincible = true;
         }
+    }
+
+    public void dodge() {
+        if (!jumping) {
+            body.setTransform(body.getPosition(), getUserData().getDodgeAngle());
+            dodging = true;
+        }
+    }
+
+    public void stopDodge() {
+        dodging = false;
+        body.setTransform(new Vector2(body.getPosition().x, Constants.RUNNER_Y - Constants.RUNNER_HEIGHT), 0f);
+    }
+
+    public boolean isDodging() {
+        return dodging;
     }
 
     public boolean isHit() {

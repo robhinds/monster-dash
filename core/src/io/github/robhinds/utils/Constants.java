@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Constants {
     public static final int APP_WIDTH = 800;
     public static final int APP_HEIGHT = 480;
+    public static final float WORLD_TO_SCREEN = 32;
 
     // This will be our viewport measurements while working with the debug renderer
     public static final int VIEWPORT_WIDTH = 20;
@@ -23,8 +24,12 @@ public class Constants {
     public static final float RUNNER_WIDTH = 1f;
     public static final float RUNNER_HEIGHT = 2f;
     public static final float RUNNER_GRAVITY_SCALE = 3f;
-    public static final String BACKGROUND_IMAGE_PATH = "favicon.png";
+    public static final String BACKGROUND_IMAGE_PATH = "background.png";
+    public static final String GROUND_IMAGE_PATH = "ground.png";
+    public static final String BACKGROUND_CLOUD_PATH = "clouds.png";
     public static float RUNNER_DENSITY = 0.5f;
+    public static final float RUNNER_DODGE_X = 2f;
+    public static final float RUNNER_DODGE_Y = 1.5f;
     public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
     public static final float RUNNER_HIT_ANGULAR_IMPULSE = 10f;
     public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(4f, 0);

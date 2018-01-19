@@ -13,7 +13,10 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 
+import io.github.robhinds.actors.Background;
 import io.github.robhinds.actors.Cloud;
 import io.github.robhinds.actors.Enemy;
 import io.github.robhinds.actors.Ground;
@@ -24,6 +27,9 @@ import io.github.robhinds.utils.WorldUtils;
 
 public class GameStage extends Stage implements ContactListener {
 
+    private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
+    private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
+
     private World world;
     private Ground ground;
     private Runner runner;
@@ -33,19 +39,22 @@ public class GameStage extends Stage implements ContactListener {
 
     private OrthographicCamera camera;
     private Box2DDebugRenderer renderer;
+    private Rectangle screenLeftSide;
     private Rectangle screenRightSide;
     private Vector3 touchPoint;
 
     public GameStage() {
+        super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
+                new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
         setUpWorld();
         setupCamera();
         setupTouchControlAreas();
-        renderer = new Box2DDebugRenderer();
     }
 
     private void setUpWorld() {
         world = WorldUtils.createWorld();
         world.setContactListener(this);
+        setUpBackground();
         setUpGround();
         setUpRunner();
         createEnemy();
@@ -54,6 +63,10 @@ public class GameStage extends Stage implements ContactListener {
 
     private void createCloud() {
         addActor(new Cloud());
+    }
+
+    private void setUpBackground() {
+        addActor(new Background());
     }
 
     private void setUpGround() {
@@ -68,11 +81,18 @@ public class GameStage extends Stage implements ContactListener {
 
     private void setupTouchControlAreas() {
         touchPoint = new Vector3();
+        screenLeftSide = new Rectangle(
+                0,
+                0,
+                getCamera().viewportWidth / 2,
+                getCamera().viewportHeight
+        );
         screenRightSide = new Rectangle(
                 getCamera().viewportWidth/2,
                 0,
                 getCamera().viewportWidth / 2,
-                getCamera().viewportHeight);
+                getCamera().viewportHeight
+        );
         Gdx.input.setInputProcessor(this);
     }
 
@@ -128,11 +148,6 @@ public class GameStage extends Stage implements ContactListener {
         //TODO: Implement interpolation
     }
 
-        @Override public void draw() {
-        super.draw();
-        renderer.render(world, camera.combined);
-    }
-
     @Override public boolean touchDown(int x, int y, int pointer, int button) {
         // Need to get the actual coordinates
         translateScreenToWorldCoordinates(x, y);
@@ -140,14 +155,25 @@ public class GameStage extends Stage implements ContactListener {
         if (rightSideTouched(touchPoint.x, touchPoint.y)) {
             System.out.println("JUMPING");
             runner.jump();
+        } else if (leftSideTouched(touchPoint.x, touchPoint.y)) {
+            System.out.println("DODGING");
+            runner.dodge();
         }
 
         return super.touchDown(x, y, pointer, button);
     }
 
+    @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (runner.isDodging()) {
+            runner.stopDodge();
+        }
+        return super.touchUp(screenX, screenY, pointer, button);
+    }
+
     private boolean rightSideTouched(float x, float y) {
         return screenRightSide.contains(x, y);
     }
+    private boolean leftSideTouched(float x, float y) { return screenLeftSide.contains(x, y); }
 
     /**
      * Helper function to get the actual coordinates in my world
