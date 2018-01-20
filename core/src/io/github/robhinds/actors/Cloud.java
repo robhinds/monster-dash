@@ -14,7 +14,7 @@ public class Cloud extends Actor {
     private final TextureRegion textureRegion;
     private Rectangle textureRegionBounds1;
     private Rectangle textureRegionBounds2;
-    private int speed = 100;
+    private int speed = 20;
 
     public Cloud() {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.BACKGROUND_CLOUD_PATH)));

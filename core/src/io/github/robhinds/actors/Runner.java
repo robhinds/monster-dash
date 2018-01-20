@@ -2,7 +2,9 @@ package io.github.robhinds.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,7 +14,10 @@ import io.github.robhinds.utils.Constants;
 
 public class Runner extends GameActor {
 
-    private final TextureRegion textureRegion;
+    private Animation runningAnimation;
+    private TextureRegion jumpingTexture;
+    private TextureRegion dodgingTexture;
+    private float stateTime;
     private boolean hit = false;
     private boolean dodging = false;
     private boolean jumping = false;
@@ -21,7 +26,15 @@ public class Runner extends GameActor {
 
     public Runner(Body body) {
         super(body);
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.HERO_IMAGE_PATH)));
+        TextureAtlas textureAtlas = new TextureAtlas(Constants.CHARACTERS_ATLAS_PATH);
+        TextureRegion[] runningFrames = new TextureRegion[Constants.RUNNER_RUNNING_REGION_NAMES.length];
+        for (int i = 0; i < Constants.RUNNER_RUNNING_REGION_NAMES.length; i++) {
+            String path = Constants.RUNNER_RUNNING_REGION_NAMES[i];
+            runningFrames[i] = textureAtlas.findRegion(path);
+        }
+        runningAnimation = new Animation(0.1f, runningFrames);
+        jumpingTexture = new TextureRegion(new Texture(Gdx.files.internal(Constants.JUMPING_IMAGE_PATH)));
+        stateTime = 0f;
     }
 
     @Override public RunnerUserData getUserData() {
@@ -30,9 +43,15 @@ public class Runner extends GameActor {
 
     @Override public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        // Running
-        batch.draw(textureRegion, screenRectangle.x, screenRectangle.y,
-                screenRectangle.getWidth(), screenRectangle.getHeight());
+        if (jumping) {
+            batch.draw(jumpingTexture, screenRectangle.x, screenRectangle.y, screenRectangle.width,
+                    screenRectangle.height);
+        } else {
+            // Running
+            stateTime += Gdx.graphics.getDeltaTime();
+            batch.draw(runningAnimation.getKeyFrame(stateTime, true), screenRectangle.x, screenRectangle.y,
+                    screenRectangle.getWidth(), screenRectangle.getHeight());
+        }
     }
 
     public void jump() {

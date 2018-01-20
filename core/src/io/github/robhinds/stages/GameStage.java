@@ -56,9 +56,9 @@ public class GameStage extends Stage implements ContactListener {
         world.setContactListener(this);
         setUpBackground();
         setUpGround();
-        setUpRunner();
-        createEnemy();
         createCloud();
+        setUpRunner();
+        //createEnemy();
     }
 
     private void createCloud() {

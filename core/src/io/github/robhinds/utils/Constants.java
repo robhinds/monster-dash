@@ -20,12 +20,15 @@ public class Constants {
     public static final float GROUND_DENSITY = 0f;
     public static final int GROUND_SPEED = 5;
 
+    public static final String CHARACTERS_ATLAS_PATH = "running.txt";
+    public static final String[] RUNNER_RUNNING_REGION_NAMES = new String[] {"running1", "running2", "running3"};
     public static final float RUNNER_X = VIEWPORT_WIDTH/2;
     public static final float RUNNER_Y = GROUND_Y + GROUND_HEIGHT;
-    public static final float RUNNER_WIDTH = 1f;
-    public static final float RUNNER_HEIGHT = 2f;
+    public static final float RUNNER_WIDTH = 3f;
+    public static final float RUNNER_HEIGHT = 6f;
     public static final float RUNNER_GRAVITY_SCALE = 3f;
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
+    public static final String JUMPING_IMAGE_PATH = "running3.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
     public static final String HERO_IMAGE_PATH = "pacman.png";
     public static final String ENEMY_IMAGE_PATH = "ghost.png";
@@ -33,7 +36,7 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
     public static final float RUNNER_DODGE_X = 2f;
     public static final float RUNNER_DODGE_Y = 1.5f;
-    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
+    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 117f);
     public static final float RUNNER_HIT_ANGULAR_IMPULSE = 10f;
     public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(4f, 0);
 

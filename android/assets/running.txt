@@ -1,0 +1,26 @@
+running.png
+size: 540, 361
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+running1
+  rotate: false
+  xy: 0, 0
+  size: 172, 361
+  orig: 172, 361
+  offset: 0, 0
+  index: -1
+running2
+  rotate: false
+  xy: 172, 0
+  size: 172, 358
+  orig: 172, 358
+  offset: 0, 0
+  index: -1
+running3
+  rotate: false
+  xy: 344, 0
+  size: 196, 353
+  orig: 196, 353
+  offset: 0, 0
+  index: -1
