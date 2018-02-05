@@ -20,11 +20,13 @@ public class Constants {
     public static final float GROUND_DENSITY = 0f;
     public static final int GROUND_SPEED = 5;
 
+    public static final String BADDY_CHARACTERS_ATLAS_PATH = "baddy.txt";
+    public static final String[] BADDY_RUNNING_REGION_NAMES = new String[] {"running1", "running2", "running3"};
     public static final String CHARACTERS_ATLAS_PATH = "running.txt";
     public static final String[] RUNNER_RUNNING_REGION_NAMES = new String[] {"running1", "running2", "running3"};
-    public static final float RUNNER_X = VIEWPORT_WIDTH/2;
-    public static final float RUNNER_Y = GROUND_Y + GROUND_HEIGHT;
     public static final float RUNNER_WIDTH = 3f;
+    public static final float RUNNER_X = VIEWPORT_WIDTH/2 + RUNNER_WIDTH;
+    public static final float RUNNER_Y = GROUND_Y + GROUND_HEIGHT;
     public static final float RUNNER_HEIGHT = 6f;
     public static final float RUNNER_GRAVITY_SCALE = 3f;
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
@@ -36,15 +38,15 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
     public static final float RUNNER_DODGE_X = 2f;
     public static final float RUNNER_DODGE_Y = 1.5f;
-    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 117f);
-    public static final float RUNNER_HIT_ANGULAR_IMPULSE = 10f;
+    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 125f);
+    public static final Vector2 RUNNER_HIT_ANGULAR_IMPULSE = new Vector2(-70, 50f);
     public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(4f, 0);
 
     public static final float ENEMY_X = VIEWPORT_WIDTH + 5f;
     public static final float ENEMY_Y = GROUND_HEIGHT/2;
-    public static final float ENEMY_DENSITY = RUNNER_DENSITY;
+    public static final float ENEMY_DENSITY = 0f;
     public static final float FLYING_ENEMY_Y = 5f;
-    public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-10f, 0);
+    public static final Vector2 ENEMY_LINEAR_VELOCITY = new Vector2(-9f, 0);
 
     public static final float CLOUD_X = VIEWPORT_WIDTH + 5f;
     public static final float CLOUD_Y = VIEWPORT_HEIGHT;

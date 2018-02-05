@@ -74,7 +74,7 @@ public class Runner extends GameActor {
 
     public void hit() {
         if (!invincible) {
-            body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
+            body.applyLinearImpulse(getUserData().getHitAngularImpulse(), body.getWorldCenter(), true);
             hit = true;
             invincible = true;
         }

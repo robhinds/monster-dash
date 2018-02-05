@@ -21,7 +21,7 @@ public class RunnerUserData extends UserData {
         return jumpingLinearImpulse;
     }
 
-    public float getHitAngularImpulse() {
+    public Vector2 getHitAngularImpulse() {
         return Constants.RUNNER_HIT_ANGULAR_IMPULSE;
     }
 

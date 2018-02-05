@@ -17,7 +17,12 @@ public class Ground extends GameActor {
 
     public Ground(Body body) {
         super(body);
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.GROUND_IMAGE_PATH)));
+
+        Texture imgTexture = new Texture(Gdx.files.internal("scribble.png"));
+        imgTexture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        textureRegion = new TextureRegion(imgTexture);
+        textureRegion.setRegion(0,0,imgTexture.getWidth()*3,imgTexture.getHeight()*3);
+
         textureRegionBounds1 = new Rectangle(0 - getUserData().getWidth() / 2, 0, getUserData().getWidth(),
                 getUserData().getHeight());
         textureRegionBounds2 = new Rectangle(getUserData().getWidth() / 2, 0, getUserData().getWidth(),

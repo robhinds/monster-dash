@@ -58,7 +58,7 @@ public class GameStage extends Stage implements ContactListener {
         setUpGround();
         createCloud();
         setUpRunner();
-        //createEnemy();
+        createEnemy();
     }
 
     private void createCloud() {
@@ -187,6 +187,8 @@ public class GameStage extends Stage implements ContactListener {
     @Override public void beginContact(Contact contact) {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
+        System.out.println("BODYA: " + a.getUserData().toString());
+        System.out.println("BODYB: " + b.getUserData().toString());
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
             runner.hit();
@@ -196,7 +198,26 @@ public class GameStage extends Stage implements ContactListener {
         }
     }
 
-    @Override public void endContact(Contact contact) { }
-    @Override public void preSolve(Contact contact, Manifold oldManifold) { }
+    @Override public void preSolve(Contact contact, Manifold oldManifold) {
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+        if (((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
+                (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b)))
+                        && runner.isInvincible()) {
+            System.out.println("PRE BODYA: " + a.getUserData().toString());
+            System.out.println("PRE BODYB: " + b.getUserData().toString());
+            contact.setEnabled(false);
+        }
+    }
+
+    @Override public void endContact(Contact contact) {
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+        if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
+                (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
+            runner.setInvincible(false);
+        }
+    }
+
     @Override public void postSolve(Contact contact, ContactImpulse impulse) { }
 }

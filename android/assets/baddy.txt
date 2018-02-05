@@ -1,0 +1,26 @@
+baddy.png
+size: 589, 861
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+running1
+  rotate: false
+  xy: 0, 293
+  size: 589, 292
+  orig: 613, 390
+  offset: 24, 78
+  index: -1
+running2
+  rotate: false
+  xy: 0, 585
+  size: 589, 276
+  orig: 613, 390
+  offset: 24, 94
+  index: -1
+running3
+  rotate: false
+  xy: 0, 0
+  size: 589, 293
+  orig: 613, 390
+  offset: 24, 77
+  index: -1
