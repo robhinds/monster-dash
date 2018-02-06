@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 public class Score extends Actor {
 
     private float score;
+    private float bestScore;
     private int multiplier;
     private Rectangle bounds;
     private BitmapFont font;
@@ -19,11 +20,12 @@ public class Score extends Actor {
         this.bounds = bounds;
         setWidth(bounds.width);
         setHeight(bounds.height);
+        bestScore = 0;
         score = 0;
         multiplier = 5;
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("roboto_bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 36;
+        parameter.size = 28;
         font = generator.generateFont(parameter);
         font.setColor(.21f, .22f, .21f, 1f);
         generator.dispose();
@@ -41,11 +43,17 @@ public class Score extends Actor {
         if (getScore() == 0) {
             return;
         }
-        font.draw(batch, String.format("%d", getScore()), bounds.x, bounds.y, bounds.width, Align.right, true);
+        String output = "Top Score: " + String.format("%d", (int) Math.floor(bestScore)) + "\nScore: " + String.format("%d", getScore());
+        font.draw(batch, output, bounds.x, bounds.y, bounds.width, Align.right, true);
     }
 
     public int getScore() {
         return (int) Math.floor(score);
+    }
+
+    public void setScore(float s) {
+        bestScore = score;
+        score = s;
     }
 
     public void setMultiplier(int multiplier) {

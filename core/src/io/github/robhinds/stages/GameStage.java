@@ -83,8 +83,8 @@ public class GameStage extends Stage implements ContactListener {
     }
 
     private void setUpScore() {
-        Rectangle scoreBounds = new Rectangle(getCamera().viewportWidth * 47 / 64,
-                getCamera().viewportHeight * 57 / 64, getCamera().viewportWidth / 4,
+        Rectangle scoreBounds = new Rectangle(10,
+                getCamera().viewportHeight * 60 / 64, getCamera().viewportWidth / 4,
                 getCamera().viewportHeight / 8);
         score = new Score(scoreBounds);
         addActor(score);
@@ -123,6 +123,7 @@ public class GameStage extends Stage implements ContactListener {
     private void updateRunner(Body body) {
         if (!BodyUtils.bodyInBounds(body)) {
             setUpRunner();
+            score.setScore(0f);
             world.destroyBody(body);
         } else if (!BodyUtils.runnerIsCentered(body)) {
             if (body.getPosition().x > Constants.RUNNER_X) {
