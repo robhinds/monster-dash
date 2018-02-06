@@ -83,8 +83,8 @@ public class GameStage extends Stage implements ContactListener {
     }
 
     private void setUpScore() {
-        Rectangle scoreBounds = new Rectangle(10,
-                getCamera().viewportHeight * 60 / 64, getCamera().viewportWidth / 4,
+        Rectangle scoreBounds = new Rectangle(2,
+                getCamera().viewportHeight * 62 / 64, getCamera().viewportWidth / 4,
                 getCamera().viewportHeight / 8);
         score = new Score(scoreBounds);
         addActor(score);
@@ -172,11 +172,10 @@ public class GameStage extends Stage implements ContactListener {
         translateScreenToWorldCoordinates(x, y);
 
         if (rightSideTouched(touchPoint.x, touchPoint.y)) {
-            System.out.println("JUMPING");
             runner.jump();
         } else if (leftSideTouched(touchPoint.x, touchPoint.y)) {
-            System.out.println("DODGING");
-            runner.dodge();
+            //runner.dodge();
+            runner.jump();
         }
 
         return super.touchDown(x, y, pointer, button);

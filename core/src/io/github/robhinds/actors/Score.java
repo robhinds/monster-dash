@@ -25,7 +25,7 @@ public class Score extends Actor {
         multiplier = 5;
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("roboto_bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 28;
+        parameter.size = 20;
         font = generator.generateFont(parameter);
         font.setColor(.21f, .22f, .21f, 1f);
         generator.dispose();
@@ -44,7 +44,7 @@ public class Score extends Actor {
             return;
         }
         String output = "Top Score: " + String.format("%d", (int) Math.floor(bestScore)) + "\nScore: " + String.format("%d", getScore());
-        font.draw(batch, output, bounds.x, bounds.y, bounds.width, Align.right, true);
+        font.draw(batch, output, bounds.x, bounds.y, bounds.width, Align.left, true);
     }
 
     public int getScore() {
