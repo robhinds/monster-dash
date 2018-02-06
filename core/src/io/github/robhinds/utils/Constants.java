@@ -38,9 +38,10 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
     public static final float RUNNER_DODGE_X = 2f;
     public static final float RUNNER_DODGE_Y = 1.5f;
-    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 125f);
-    public static final Vector2 RUNNER_HIT_ANGULAR_IMPULSE = new Vector2(-70, 50f);
-    public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(4f, 0);
+    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 110f);
+    public static final Vector2 RUNNER_HIT_ANGULAR_IMPULSE = new Vector2(-90, 60f);
+    public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(-1f, 0);
+    public static Vector2 RUNNER_RUN_FORWARD_LINEAR_IMPULSE = new Vector2(1f, 0);
 
     public static final float ENEMY_X = VIEWPORT_WIDTH + 5f;
     public static final float ENEMY_Y = GROUND_HEIGHT/2;

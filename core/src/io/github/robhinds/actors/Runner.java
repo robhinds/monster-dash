@@ -55,7 +55,7 @@ public class Runner extends GameActor {
     }
 
     public void jump() {
-        if (!doubleJumping && !hit) {
+        if (!doubleJumping) {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             doubleJumping = jumping;
             jumping = true;

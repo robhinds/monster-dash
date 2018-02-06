@@ -21,6 +21,7 @@ import io.github.robhinds.actors.Cloud;
 import io.github.robhinds.actors.Enemy;
 import io.github.robhinds.actors.Ground;
 import io.github.robhinds.actors.Runner;
+import io.github.robhinds.actors.Score;
 import io.github.robhinds.utils.BodyUtils;
 import io.github.robhinds.utils.Constants;
 import io.github.robhinds.utils.WorldUtils;
@@ -33,6 +34,7 @@ public class GameStage extends Stage implements ContactListener {
     private World world;
     private Ground ground;
     private Runner runner;
+    private Score score;
 
     private final float TIME_STEP = 1 / 300f;
     private float accumulator = 0f;
@@ -57,6 +59,7 @@ public class GameStage extends Stage implements ContactListener {
         setUpBackground();
         setUpGround();
         createCloud();
+        setUpScore();
         setUpRunner();
         createEnemy();
     }
@@ -77,6 +80,14 @@ public class GameStage extends Stage implements ContactListener {
     private void setUpRunner() {
         runner = new Runner(WorldUtils.createRunner(world));
         addActor(runner);
+    }
+
+    private void setUpScore() {
+        Rectangle scoreBounds = new Rectangle(getCamera().viewportWidth * 47 / 64,
+                getCamera().viewportHeight * 57 / 64, getCamera().viewportWidth / 4,
+                getCamera().viewportHeight / 8);
+        score = new Score(scoreBounds);
+        addActor(score);
     }
 
     private void setupTouchControlAreas() {
@@ -110,8 +121,15 @@ public class GameStage extends Stage implements ContactListener {
     }
 
     private void updateRunner(Body body) {
-        if (!BodyUtils.runnerIsCentered(body)) {
-            //body.applyLinearImpulse(Constants.RUNNER_RUN_BACK_LINEAR_IMPULSE, body.getWorldCenter(), true);
+        if (!BodyUtils.bodyInBounds(body)) {
+            setUpRunner();
+            world.destroyBody(body);
+        } else if (!BodyUtils.runnerIsCentered(body)) {
+            if (body.getPosition().x > Constants.RUNNER_X) {
+                body.applyLinearImpulse(Constants.RUNNER_RUN_BACK_LINEAR_IMPULSE, body.getWorldCenter(), true);
+            } else {
+                body.applyLinearImpulse(Constants.RUNNER_RUN_FORWARD_LINEAR_IMPULSE, body.getWorldCenter(), true);
+            }
         }
     }
 
@@ -187,8 +205,6 @@ public class GameStage extends Stage implements ContactListener {
     @Override public void beginContact(Contact contact) {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
-        System.out.println("BODYA: " + a.getUserData().toString());
-        System.out.println("BODYB: " + b.getUserData().toString());
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
             runner.hit();
@@ -204,8 +220,6 @@ public class GameStage extends Stage implements ContactListener {
         if (((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b)))
                         && runner.isInvincible()) {
-            System.out.println("PRE BODYA: " + a.getUserData().toString());
-            System.out.println("PRE BODYB: " + b.getUserData().toString());
             contact.setEnabled(false);
         }
     }
