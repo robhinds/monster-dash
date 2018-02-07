@@ -126,6 +126,7 @@ public class GameStage extends Stage implements ContactListener {
         if (!BodyUtils.bodyInBounds(body)) {
             setUpRunner();
             score.setScore(0f);
+            AudioUtils.getInstance().playSound(AudioUtils.getInstance().getRestartSound());
             world.destroyBody(body);
         }
     }
