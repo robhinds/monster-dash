@@ -22,6 +22,7 @@ import io.github.robhinds.actors.Enemy;
 import io.github.robhinds.actors.Ground;
 import io.github.robhinds.actors.Runner;
 import io.github.robhinds.actors.Score;
+import io.github.robhinds.utils.AudioUtils;
 import io.github.robhinds.utils.BodyUtils;
 import io.github.robhinds.utils.Constants;
 import io.github.robhinds.utils.WorldUtils;
@@ -56,6 +57,7 @@ public class GameStage extends Stage implements ContactListener {
     private void setUpWorld() {
         world = WorldUtils.createWorld();
         world.setContactListener(this);
+        AudioUtils.getInstance().init();
         setUpBackground();
         setUpGround();
         createCloud();
@@ -125,12 +127,6 @@ public class GameStage extends Stage implements ContactListener {
             setUpRunner();
             score.setScore(0f);
             world.destroyBody(body);
-        } else if (!BodyUtils.runnerIsCentered(body)) {
-            if (body.getPosition().x > Constants.RUNNER_X) {
-                body.applyLinearImpulse(Constants.RUNNER_RUN_BACK_LINEAR_IMPULSE, body.getWorldCenter(), true);
-            } else {
-                body.applyLinearImpulse(Constants.RUNNER_RUN_FORWARD_LINEAR_IMPULSE, body.getWorldCenter(), true);
-            }
         }
     }
 
@@ -230,6 +226,7 @@ public class GameStage extends Stage implements ContactListener {
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
             runner.setInvincible(false);
+            runner.setHit(false);
         }
     }
 

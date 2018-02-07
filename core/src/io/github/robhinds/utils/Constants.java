@@ -25,12 +25,13 @@ public class Constants {
     public static final String CHARACTERS_ATLAS_PATH = "running.txt";
     public static final String[] RUNNER_RUNNING_REGION_NAMES = new String[] {"running1", "running2", "running3"};
     public static final float RUNNER_WIDTH = 3f;
-    public static final float RUNNER_X = VIEWPORT_WIDTH/2 + RUNNER_WIDTH;
+    public static final float RUNNER_X = (VIEWPORT_WIDTH/3)*2 + RUNNER_WIDTH;
     public static final float RUNNER_Y = GROUND_Y + GROUND_HEIGHT;
     public static final float RUNNER_HEIGHT = 6f;
     public static final float RUNNER_GRAVITY_SCALE = 3f;
     public static final String BACKGROUND_IMAGE_PATH = "background.png";
     public static final String JUMPING_IMAGE_PATH = "running3.png";
+    public static final String TRANSPARENT_IMAGE_PATH = "runningblink.png";
     public static final String GROUND_IMAGE_PATH = "ground.png";
     public static final String HERO_IMAGE_PATH = "pacman.png";
     public static final String ENEMY_IMAGE_PATH = "ghost.png";
@@ -38,8 +39,8 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
     public static final float RUNNER_DODGE_X = 2f;
     public static final float RUNNER_DODGE_Y = 1.5f;
-    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 110f);
-    public static final Vector2 RUNNER_HIT_ANGULAR_IMPULSE = new Vector2(-90, 60f);
+    public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 120f);
+    public static final Vector2 RUNNER_HIT_ANGULAR_IMPULSE = new Vector2(-70, 0f);
     public static Vector2 RUNNER_RUN_BACK_LINEAR_IMPULSE = new Vector2(-1f, 0);
     public static Vector2 RUNNER_RUN_FORWARD_LINEAR_IMPULSE = new Vector2(1f, 0);
 
@@ -53,4 +54,9 @@ public class Constants {
     public static final float CLOUD_Y = VIEWPORT_HEIGHT;
     public static final float CLOUD_DENSITY = -10;
     public static final Vector2 CLOUD_LINEAR_VELOCITY = new Vector2(-2f, 0);
+
+    public static final String GAME_MUSIC = "timer-first-half-loop.mp3";
+    public static final String RUNNER_JUMPING_SOUND = "jump.wav";
+    public static final String RUNNER_HIT_SOUND = "shoot-laser.wav";
+    public static final String RUNNER_RESTART_SOUND = "level-up.wav";
 }

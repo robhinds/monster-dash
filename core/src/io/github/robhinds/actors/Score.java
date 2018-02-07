@@ -52,7 +52,7 @@ public class Score extends Actor {
     }
 
     public void setScore(float s) {
-        bestScore = score;
+        if (score > bestScore) bestScore = score;
         score = s;
     }
 

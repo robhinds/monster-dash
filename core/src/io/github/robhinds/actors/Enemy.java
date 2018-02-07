@@ -41,8 +41,8 @@ public class Enemy extends GameActor {
     @Override public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         stateTime += Gdx.graphics.getDeltaTime();
-        batch.draw(runningAnimation.getKeyFrame(stateTime, true), screenRectangle.x, screenRectangle.y,
-                screenRectangle.getWidth(), screenRectangle.getHeight());
+        batch.draw(runningAnimation.getKeyFrame(stateTime, true), screenRectangle.x-screenRectangle.getWidth(), screenRectangle.y,
+                screenRectangle.getWidth()*2, screenRectangle.getHeight()*2);
     }
 
 }
